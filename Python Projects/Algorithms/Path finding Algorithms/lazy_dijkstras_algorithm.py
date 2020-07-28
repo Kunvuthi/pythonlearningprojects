@@ -53,6 +53,7 @@ class Graph:
         dist, prev = self.dijkstra(start)
         path = []
         at = end
+        ## finding whether end node is reachable, otherwise, stop and return nothing.
         if dist[end] == inf:
             return path
         while prev[at]:
