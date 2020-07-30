@@ -13,7 +13,7 @@ Lime = (0,255,0)
 Blue = (65,105,225)
 Yellow = (255,255,0)
 Aqua = (0,255,255)
-Magenta = (255,0,255)
+Endcolor = (139,0,139)
 Grey = (128,128,128)
 
 class Spot:
@@ -44,19 +44,22 @@ class Spot:
         return self.color == Yellow
 
     def is_end(self):
-        return self.color == Magenta
+        return self.color == Endcolor
 
     def reset(self):
-        return self.color == White
+        self.color = White
 
     def make_open(self):
         self.color = Lime
+
+    def make_start(self):
+        self.color = Yellow
 
     def make_barrier(self):
         self.color = Black 
 
     def make_end(self):
-        self.color == Magenta
+        self.color == Endcolor
 
     def make_path(self):
         self.color == Blue 
@@ -104,14 +107,62 @@ def draw(win, grid, rows, width):
 
 def get_clicked_pos(pos, rows, width):
     gap = width // rows 
-    i, j = pos
+    y, x = pos
 
-    row = i // gap
-    col = j // gap
+    row = y // gap
+    col = x // gap
 
     return row, col
 
 
+def main(win, width):
+    ROWS = 50
+    grid = make_grid(ROWS, width)
+
+    start = None
+    end = None
+
+    run = True
+    started = False
+    while run:
+        draw(win, grid, ROWS, width)
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                run = False
+            
+            if started:
+                continue
+
+            if pygame.mouse.get_pressed()[0]:  ## Left Click
+                pos = pygame.mouse.get_pos()
+                row, col = get_clicked_pos(pos, ROWS, width)
+                spot = grid[row][col]
+                if not start and spot != end:
+                    start = spot
+                    start.make_start()
+
+                elif not end and spot != start:
+                    end = spot
+                    end.make_end()
+
+                elif spot != end and spot != start:
+                    spot.make_barrier()
+                     
+
+            elif pygame.mouse.get_pressed()[2]:  ## Right Click
+                pos = pygame.mouse.get_pos()
+                row, col = get_clicked_pos(pos, ROWS, width)
+                spot = grid[row][col]
+                spot.reset()
+                if spot == start:
+                    start = None
+
+                elif spot == end:
+                    end == None
+    pygame.quit()
+
+
+main(WIN, WIDTH)
 
 # class Graph:
 #     def __init__(self, arr):
