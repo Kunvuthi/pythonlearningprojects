@@ -108,7 +108,7 @@ graph = Graph([[1, 5],
 
 
 ## Find shortest path from node 0 --> 6
-# print(graph.bfs(0, 6))
+print(graph.bfs(0, 6))
 
 
 
