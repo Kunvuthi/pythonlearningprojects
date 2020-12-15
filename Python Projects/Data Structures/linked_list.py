@@ -12,7 +12,7 @@ class LinkedList:
 
     def insert_at_head(self, data):
         node = Node(data, self.head)  ## Making a new Node object where next pointer is pointing at the first element
-        self.head = node ## Then making the node created become the first element 
+        self.head = node ## Then make the node created to become the first element 
 
     def insert_at_tail(self,data):
         if self.head is None:

@@ -96,8 +96,6 @@ class BinarySearchTree():
 
 
 
-
-
 def buildTree(arr):
     root = BinarySearchTree(arr[0])
 
@@ -108,7 +106,7 @@ def buildTree(arr):
 
 
 if __name__ == "__main__":
-    arr = [4,6,1,2,5,15,7,9,20,10,8,3]
+    arr = [4,6,1,2,5,15,7,9,20,10,8,3,4]
     tree = buildTree(arr)
     tree.delete(5)
     print(tree.in_order_traversal())

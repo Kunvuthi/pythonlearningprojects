@@ -5,7 +5,7 @@ class HashMap:
         self.MAX = 100
         self.arr = [[] for i in range(self.MAX)]
 
-    def get_hash(self, key):    ## Converting Key into ASCII code and take the sum all with modulo of the size of the Hash Table 
+    def get_hash(self, key):    ## Converting Key into ASCII code and take the sum all of the ASCII value of char with the modulo of the size of the Hash Table 
         h = 0 
         for char in key:
             h += ord(char)

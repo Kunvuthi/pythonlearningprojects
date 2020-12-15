@@ -19,7 +19,7 @@ def gradient_descent(x, y):
 
         ## Updating m, b values to converge ## 
         m_current = m_current - (learning_rate*d_dm)
-        b_current = b_current - (learning_rate*d_db)
+        b_current = b_current - (learning_rate*d_db)        
         print("m: {}, b: {}, cost: {}, iteration: {}".format(m_current, b_current, cost_func, i))
 
 
