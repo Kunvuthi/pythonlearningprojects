@@ -1,52 +1,53 @@
-import math
 import random
+## Python uses Timsort which is derived from merge sort and insertion sort ##
 
+def merge_sort(arr):
+    if len(arr) <= 1:
+        return arr
 
-def MergeSort(arr):                 ## User Interface
-    MergeSort2(arr, 0, len(arr)-1)  
+    mid = len(arr)//2
+    left = arr[:mid]
+    right= arr[mid:]
+    merge_sort(left)
+    merge_sort(right)
+    merge_two_sorted_lists(left, right, arr)
 
+def merge_two_sorted_lists(a,b,arr):
+    i=j=k=0
 
-def MergeSort2(arr, lb, ub):     
-    if lb < ub:
-        mid = math.floor((lb+ub)/2) 
-        MergeSort2(arr, lb, mid)
-        MergeSort2(arr, mid+1, ub)
-        merge(arr, lb, mid, ub)
-
-def merge(arr, lb, mid, ub):
-    counter_left = lb
-    counter_right = mid + 1
-    counter_k = lb
-    sublist = []
-
-    while (counter_left <= mid) & (counter_right <= ub):  ## If both list's pointer are still pointing within the list
-        if arr[counter_left] < arr[counter_right]: ## if left is smaller than right then the new sublist will append right
-            sublist.append(arr[counter_left])
-            counter_left += 1
-        elif arr[counter_right] < arr[counter_left]: ## if right is smaller than left                                                    
-            sublist.append(arr[counter_right]) ##       then the new sublist will append right
-            counter_right += 1
-        counter_k += 1
-    if counter_left > mid: ## If left pointer is out of the left array
-        while counter_right <= ub:         ## Loop all the left over stuff from the right array 
-            sublist.append(arr[counter_right])
-            counter_right += 1
-            counter_k += 1
-    elif counter_right > mid:
-        while counter_left <= mid:           ## Vise Versa
-            sublist.append(arr[counter_left])
-            counter_left += 1
-            counter_k += 1
-    i = lb                         ## Update values in original array
-    for val in sublist:
-        arr[i] = val
+    while i < len(a) and j < len(b):
+        if a[i] <= b[j]:
+            arr[k] = a[i]
+            i += 1
+        else:
+            arr[k] = b[j]
+            j += 1
+        k += 1
+    while i < len(a):
+        arr[k] = a[i]
         i += 1
+        k += 1
+    while j < len(b):
+        arr[k] = b[j]
+        j += 1
+        k += 1
+    
 
-arr = []
-for i in range(15):
-    arr.append(random.randint(0,51))
+
+if __name__ == '__main__':
+    cases = [[10,5,2,7,34,2,7,8,9], [], [6], [9,8,7,6], [1,2,3,4,5]]
+
+    for arr in cases:
+       merge_sort(arr)
+       print(arr)
 
 
-print(arr)
-MergeSort(arr)
-print(arr)
+# Testing for index
+# arr_test = [0,1,2,3,4,5,6,7,8]
+# mid_test = len(arr_test)//2
+# left_test = arr[:mid_test]
+# right_test = arr[mid_test:]
+
+# print(mid_test)
+# print(left_test)
+# print(right_test)
