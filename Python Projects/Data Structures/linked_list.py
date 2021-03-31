@@ -84,8 +84,6 @@ class LinkedList:
             itr = itr.next    
             counter +=1 
 
-        
-
 
 if __name__ == "__main__":
     ll = LinkedList()

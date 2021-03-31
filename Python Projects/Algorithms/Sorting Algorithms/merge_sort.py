@@ -44,7 +44,7 @@ def merge(arr, lb, mid, ub):
 
 arr = []
 for i in range(15):
-    arr.append(random.randint(0,50))
+    arr.append(random.randint(0,51))
 
 
 print(arr)
